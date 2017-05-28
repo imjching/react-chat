@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "webpack -p"
+    "build": "webpack -p && cp ./dist/* ./public/assets"
   },
   "dependencies": {
     "react": "^15.5.4",
