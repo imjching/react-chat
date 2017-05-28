@@ -2,18 +2,18 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  context: path.resolve(__dirname, 'src'),
+  context: path.resolve(__dirname, 'chat-frontend'),
   entry: './app.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'app.bundle.js',
-    publicPath: '/assets/',
+    path: path.resolve(__dirname, './build'),
+    filename: 'js/app.bundle.js',
+    publicPath: '/assets/'
   },
   devServer: {
     contentBase: path.join(__dirname, "public"),
     compress: true,
     port: 9000,
-    publicPath: '/assets/',
+    publicPath: '/assets/'
   },
   module: {
     rules: [
@@ -23,14 +23,14 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015', 'react'],
+            presets: ['es2015', 'react']
           }
         }
       }
     ]
   },
   stats: {
-    colors: true,
+    colors: true
   },
-  devtool: 'source-map',
+  devtool: 'source-map'
 };
