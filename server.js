@@ -1,16 +1,39 @@
-const express = require('express');
-const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
-const path = require('path');
+const express           = require('express');
+const path              = require('path');
+const compress          = require('compression');
 
-const publicPath = path.join(__dirname, '../', 'public');
+const webpack               = require('webpack');
+const webpackDevMiddleware  = require("webpack-dev-middleware");
+const webpackHotMiddleware  = require('webpack-hot-middleware');
+const config                = require('./webpack.config');
+
+const app               = express();
+const server            = require('http').Server(app);
+const io                = require('socket.io')(server);
+
+const compiler = webpack(config);
+app.use(webpackDevMiddleware(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath,
+  stats: {
+    colors: true
+  },
+  hot: true,
+  historyApiFallback: true
+}));
+
+app.use(webpackHotMiddleware(compiler));
+
+// Default routes
+const publicPath = path.join(__dirname, 'public');
 app.use(express.static(publicPath));
+app.use(compress());
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(publicPath, 'index.html'));
 });
 
+// Socket handler
 io.on('connection', function (socket) {
   console.log('connected');
   socket.on('username', function(username) {
@@ -34,7 +57,7 @@ io.on('connection', function (socket) {
     socket.join(requestedRoom, function() {
       socket.to(requestedRoom).emit('message', {
         username: 'System',
-        content: socket.username + ' has joined'
+        content: `${socket.username} has joined`
       });
     });
   });
@@ -52,5 +75,5 @@ io.on('connection', function (socket) {
 
 const port = process.env.PORT || 3000;
 server.listen(port, function () {
-  console.log(`Backend server listening on port ${port}!`);
+  console.log(`Server listening on port ${port}!`);
 });

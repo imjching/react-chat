@@ -2,17 +2,14 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  context: path.resolve(__dirname, 'chat-frontend'),
-  entry: './app.js',
+  context: path.resolve(__dirname, 'client'),
+  entry: [
+    'webpack-hot-middleware/client?__webpack_hmr&timeout=20000&reload=true',
+    './app'
+  ],
   output: {
     path: path.resolve(__dirname, './build'),
     filename: 'js/app.bundle.js',
-    publicPath: '/assets/'
-  },
-  devServer: {
-    contentBase: path.join(__dirname, "public"),
-    compress: true,
-    port: 9000,
     publicPath: '/assets/'
   },
   module: {
@@ -29,6 +26,10 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ],
   stats: {
     colors: true
   },

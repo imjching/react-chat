@@ -1,0 +1,13 @@
+#welcome-message {
+  margin-top: 20px;
+}
+
+#rooms {
+  margin-bottom: 20px;
+}
+
+.media-list {
+  min-height: 200px;
+  max-height: 200px;
+  overflow-y: scroll;
+}

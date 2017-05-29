@@ -1,14 +1,15 @@
+<!-- You have to restart your server when this is changed -->
+<!-- Webpack only rebuilds files in the client folder -->
 <!DOCTYPE html>
 <html>
   <head>
     <title>React Chat</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
   </head>
   <body>
-    <div id='root'></div>
-    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <!-- <script src="/assets/js/bootstrap.min.js"></script> -->
+    <div id='root' class='container'></div>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="/assets/js/app.bundle.js"></script>
   </body>
 </html>
