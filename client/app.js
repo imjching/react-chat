@@ -181,9 +181,9 @@ class ChatRoom extends Component {
                   />
                   <span className="input-group-btn">
                     {this.props.roomName.length == 0 ?
-                      <button className="btn btn-info" type="button" disabled>SEND</button>
+                      <button className="btn btn-info" type="submit" disabled>SEND</button>
                     :
-                      <button className="btn btn-info" type="button">SEND</button>
+                      <button className="btn btn-info" type="submit">SEND</button>
                     }
                   </span>
                 </div>
